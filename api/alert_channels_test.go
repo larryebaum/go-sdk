@@ -45,7 +45,7 @@ func TestAlertChannelTypes(t *testing.T) {
 		"wrong alert channel type",
 	)
 	assert.Equal(t,
-		"CloudwatchEb", api.AWSCloudwatchAlertChannelType.String(),
+		"CloudwatchEb", api.CloudwatchEbAlertChannelType.String(),
 		"wrong alert channel type",
 	)
 }
@@ -259,7 +259,7 @@ func generateAlertChannels(guids []string, iType string) string {
 			alertChannels[i] = singleSlackChannelAlertChannel(guid)
 		case api.AwsS3AlertChannelType.String():
 			alertChannels[i] = singleAwsS3AlertChannel(guid)
-		case api.AWSCloudwatchAlertChannelType.String():
+		case api.CloudwatchEbAlertChannelType.String():
 			alertChannels[i] = singleAWSCloudwatchAlertChannel(guid)
 		}
 	}

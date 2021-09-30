@@ -83,16 +83,16 @@ const (
 	EmailUserAlertChannelType
 	SlackChannelAlertChannelType
 	AwsS3AlertChannelType
-	AWSCloudwatchAlertChannelType
+	CloudwatchEbAlertChannelType
 )
 
 // AlertChannelTypeTypes is the list of available Alert Channel integration types
 var AlertChannelTypes = map[alertChannelType]string{
-	NoneAlertChannelType:          "None",
-	EmailUserAlertChannelType:     "EmailUser",
-	SlackChannelAlertChannelType:  "SlackChannel",
-	AwsS3AlertChannelType:         "AwsS3",
-	AWSCloudwatchAlertChannelType: "CloudwatchEb",
+	NoneAlertChannelType:         "None",
+	EmailUserAlertChannelType:    "EmailUser",
+	SlackChannelAlertChannelType: "SlackChannel",
+	AwsS3AlertChannelType:        "AwsS3",
+	CloudwatchEbAlertChannelType: "CloudwatchEb",
 }
 
 // String returns the string representation of a Alert Channel integration type

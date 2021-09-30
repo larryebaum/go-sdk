@@ -18,28 +18,28 @@
 
 package api
 
-// GetAWSCloudwatch gets a single instance of an AWS Cloudwatch alert channel
+// GetCloudwatchEb gets a single instance of an AWS Cloudwatch alert channel
 // with the corresponding integration guid
-func (svc *AlertChannelsService) GetAWSCloudwatch(guid string) (response AWSCloudwatchAlertChannelResponseV2, err error) {
+func (svc *AlertChannelsService) GetCloudwatchEb(guid string) (response CloudwatchEbAlertChannelResponseV2, err error) {
 	err = svc.get(guid, &response)
 	return
 }
 
-// UpdateAWSCloudwatch Update AWSCloudWatch updates a single instance of an AWS cloudwatch integration on the Lacework server
-func (svc *AlertChannelsService) UpdateAWSCloudwatch(data AlertChannel) (response AWSCloudwatchAlertChannelResponseV2, err error) {
+// UpdateCloudwatchEb Update AWSCloudWatch updates a single instance of an AWS cloudwatch integration on the Lacework server
+func (svc *AlertChannelsService) UpdateCloudwatchEb(data AlertChannel) (response CloudwatchEbAlertChannelResponseV2, err error) {
 	err = svc.update(data.ID(), data, &response)
 	return
 }
 
-type AWSCloudwatchDataV2 struct {
+type CloudwatchEbDataV2 struct {
 	EventBusArn string `json:"eventBusArn"`
 }
 
-type AWSCloudwatchAlertChannelV2 struct {
+type CloudwatchEbAlertChannelV2 struct {
 	v2CommonIntegrationData
-	Data AWSCloudwatchDataV2 `json:"data"`
+	Data CloudwatchEbDataV2 `json:"data"`
 }
 
-type AWSCloudwatchAlertChannelResponseV2 struct {
-	Data AWSCloudwatchAlertChannelV2 `json:"data"`
+type CloudwatchEbAlertChannelResponseV2 struct {
+	Data CloudwatchEbAlertChannelV2 `json:"data"`
 }

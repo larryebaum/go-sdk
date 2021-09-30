@@ -30,7 +30,7 @@ import (
 	"github.com/lacework/go-sdk/internal/lacework"
 )
 
-func TestAlertChannelsService_GetAWSCloudwatch(t *testing.T) {
+func TestAlertChannelsService_GetCloudwatchEb(t *testing.T) {
 	var (
 		intgGUID   = intgguid.New()
 		apiPath    = fmt.Sprintf("AlertChannels/%s", intgGUID)
@@ -41,7 +41,7 @@ func TestAlertChannelsService_GetAWSCloudwatch(t *testing.T) {
 	defer fakeServer.Close()
 
 	fakeServer.MockAPI(apiPath, func(w http.ResponseWriter, r *http.Request) {
-		assert.Equal(t, "GET", r.Method, "GetAWSCloudwatch() should be a GET method")
+		assert.Equal(t, "GET", r.Method, "GetCloudwatchEb() should be a GET method")
 		fmt.Fprintf(w, generateAlertChannelResponse(singleAWSCloudwatchAlertChannel(intgGUID)))
 	})
 
@@ -52,7 +52,7 @@ func TestAlertChannelsService_GetAWSCloudwatch(t *testing.T) {
 	)
 	assert.Nil(t, err)
 
-	response, err := c.V2.AlertChannels.GetAWSCloudwatch(intgGUID)
+	response, err := c.V2.AlertChannels.GetCloudwatchEb(intgGUID)
 	assert.Nil(t, err)
 	assert.NotNil(t, response)
 	assert.Equal(t, intgGUID, response.Data.IntgGuid)
@@ -61,7 +61,7 @@ func TestAlertChannelsService_GetAWSCloudwatch(t *testing.T) {
 	assert.Equal(t, response.Data.Data.EventBusArn, "arn:aws:events:YourRegion:YourAccountID:event-bus/default")
 }
 
-func TestAlertChannelsService_UpdateAWSCloudwatch(t *testing.T) {
+func TestAlertChannelsService_UpdateCloudwatchEb(t *testing.T) {
 	var (
 		intgGUID    = intgguid.New()
 		apiPath     = fmt.Sprintf("AlertChannels/%s", intgGUID)
@@ -73,7 +73,7 @@ func TestAlertChannelsService_UpdateAWSCloudwatch(t *testing.T) {
 	defer fakeServer.Close()
 
 	fakeServer.MockAPI(apiPath, func(w http.ResponseWriter, r *http.Request) {
-		assert.Equal(t, "PATCH", r.Method, "UpdateAWSCloudwatch() should be a PATCH method")
+		assert.Equal(t, "PATCH", r.Method, "UpdateCloudwatchEb() should be a PATCH method")
 
 		if assert.NotNil(t, r.Body) {
 			body := httpBodySniffer(r)
@@ -95,15 +95,15 @@ func TestAlertChannelsService_UpdateAWSCloudwatch(t *testing.T) {
 	assert.Nil(t, err)
 
 	emailAlertChan := api.NewAlertChannel("integration_name",
-		api.AWSCloudwatchAlertChannelType,
-		api.AWSCloudwatchDataV2{EventBusArn: eventBusArn},
+		api.CloudwatchEbAlertChannelType,
+		api.CloudwatchEbDataV2{EventBusArn: eventBusArn},
 	)
 	assert.Equal(t, "integration_name", emailAlertChan.Name)
 	assert.Equal(t, "CloudwatchEb", emailAlertChan.Type)
 	assert.Equal(t, 1, emailAlertChan.Enabled)
 	emailAlertChan.IntgGuid = intgGUID
 
-	response, err := c.V2.AlertChannels.UpdateAWSCloudwatch(emailAlertChan)
+	response, err := c.V2.AlertChannels.UpdateCloudwatchEb(emailAlertChan)
 	assert.Nil(t, err)
 	assert.NotNil(t, response)
 	assert.Equal(t, intgGUID, response.Data.IntgGuid)
